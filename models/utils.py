@@ -1,3 +1,4 @@
+from typing import Any
 import pandas as pd
 import datetime as dt
 import os
@@ -86,12 +87,19 @@ def transform_df(path: str, test: bool = False) -> pd.DataFrame:
 
 
 def save_results(series: pd.Series) -> None:
-    """save_results _summary_
+    """
+    save_results
+    ------------
+    Recibe una serie de pandas con las predicciones del modelo y las guarda en un
+
+    archivo .csv con las especificaciones del proyectoen la carpeta resultados
+
+    asignandole un numero de prueba y la fecha
 
     Parameters
     ----------
     series : pd.Series
-        _description_
+        Serie de pandas con las predicciones del modelo
     """
 
     os.chdir("C:/Users/Agustín/Desktop/Code/PI02-DTS05/resultados")
@@ -109,9 +117,10 @@ def save_results(series: pd.Series) -> None:
 
     dir_name = f"Prueba N° {num} - {dt.datetime.now(tz=tz).strftime(r'%d %b %H-%M')}"
     os.mkdir(dir_name)
+    os.chdir(os.path.join(os.getcwd(), dir_name))
 
     series.to_csv(
-        path_or_buf=os.path.join(os.getcwd(), dir_name, "agusdm97.csv"),
+        path_or_buf="./agusdm97.csv",
         index=False,
         header=["pred"],
     )
